@@ -3,7 +3,9 @@ const API_KEY = "9634c5e8feb4b0374fe763d401506e5b";
 const INITIAL_DATA_VALUE = null;
 
 const weatherInfo = (apiData, city) => {
-  if (apiData.weather == undefined) {
+  if (city === INITIAL_DATA_VALUE) {
+    return "Wpisz miasto";
+  } else if (apiData.weather === undefined) {
     return "Nie znaleziono takiego miasta";
   } else {
     const weather = apiData.weather[0].main;
@@ -24,9 +26,15 @@ const getWeatherData = (city, callback) => {
     .catch(err => console.log(err + "this is error"));
 };
 
+const updateData = (setData, setCity, tempCity, INITIAL_DATA_VALUE) => {
+  setData(INITIAL_DATA_VALUE);
+  setCity(tempCity);
+};
+
 function Weather() {
   const [data, setData] = useState(INITIAL_DATA_VALUE);
-  const [city, setCity] = useState("Warsaw");
+  const [city, setCity] = useState(INITIAL_DATA_VALUE);
+  const [tempCity, setTempCity] = useState(INITIAL_DATA_VALUE);
 
   useEffect(() => {
     if (data === INITIAL_DATA_VALUE) {
@@ -36,15 +44,22 @@ function Weather() {
 
   return (
     <>
-      <h1>Weather in {city}</h1>
+      {city === INITIAL_DATA_VALUE ? (
+        <h1>To check weather type in city</h1>
+      ) : (
+        <h1>Weather in {city}</h1>
+      )}
+
       <input
         type="text"
-        onChange={event => setCity(event.target.value)}
+        onChange={event => setTempCity(event.target.value)}
       ></input>
       <input
         type="submit"
         value="Submit"
-        onClick={() => setData(INITIAL_DATA_VALUE)}
+        onClick={() =>
+          updateData(setData, setCity, tempCity, INITIAL_DATA_VALUE)
+        }
       />
       {console.log(city)}
       {data === INITIAL_DATA_VALUE ? (
