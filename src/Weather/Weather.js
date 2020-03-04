@@ -17,7 +17,7 @@ const weatherInfo = (apiData, city) => {
 
 const getWeatherData = (city, callback) => {
   fetch(
-    `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`
+    `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`
   )
     .then(res => res.json())
     .then(result => {
