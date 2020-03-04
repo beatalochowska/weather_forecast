@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./WeatherStyles.css";
 const API_KEY = "9634c5e8feb4b0374fe763d401506e5b";
 const INITIAL_DATA_VALUE = null;
 
@@ -44,29 +45,33 @@ function Weather() {
 
   return (
     <>
-      {city === INITIAL_DATA_VALUE ? (
-        <h1>To check weather type in city</h1>
-      ) : (
-        <h1>Weather in {city}</h1>
-      )}
+      <div className="temperatureInfo">
+        {city === INITIAL_DATA_VALUE ? (
+          <h1 className="temperatureInfo_title">
+            To check weather type in city
+          </h1>
+        ) : (
+          <h1 className="temperatureInfo_title">Weather in {city}</h1>
+        )}
 
-      <input
-        type="text"
-        onChange={event => setTempCity(event.target.value)}
-      ></input>
-      <input
-        type="submit"
-        value="Submit"
-        onClick={() =>
-          updateData(setData, setCity, tempCity, INITIAL_DATA_VALUE)
-        }
-      />
-      {console.log(city)}
-      {data === INITIAL_DATA_VALUE ? (
-        <div>Brak danych.</div>
-      ) : (
-        <div>{weatherInfo(data, city)}</div>
-      )}
+        <input
+          type="text"
+          onChange={event => setTempCity(event.target.value)}
+        ></input>
+        <input
+          type="submit"
+          value="Submit"
+          onClick={() =>
+            updateData(setData, setCity, tempCity, INITIAL_DATA_VALUE)
+          }
+        />
+        {console.log(city)}
+        {data === INITIAL_DATA_VALUE ? (
+          <div>Brak danych.</div>
+        ) : (
+          <div>{weatherInfo(data, city)}</div>
+        )}
+      </div>
     </>
   );
 }
