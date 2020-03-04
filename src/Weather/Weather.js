@@ -6,22 +6,23 @@ const INITIAL_DATA_VALUE = null;
 const weatherInfo = (apiData, city) => {
   if (city === INITIAL_DATA_VALUE) {
     return "Wpisz miasto";
-  } else if (apiData.weather === undefined) {
+  } else if (apiData.list === undefined) {
     return "Nie znaleziono takiego miasta";
   } else {
-    const weather = apiData.weather[0].main;
-    const temp = apiData.main.temp;
-    return `Temperature ${temp}; Conditions: ${weather}`;
+    const weather = apiData.list[0].weather[0].main;
+    const temperature = apiData.list[0].main.temp;
+    return `Temperature ${temperature}; Conditions: ${weather}`;
   }
 };
 
 const getWeatherData = (city, callback) => {
   fetch(
-    `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`
+    `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${API_KEY}`
   )
     .then(res => res.json())
     .then(result => {
       callback(result);
+      console.log("Result");
       console.log(result);
     })
     .catch(err => console.log(err + "this is error"));
