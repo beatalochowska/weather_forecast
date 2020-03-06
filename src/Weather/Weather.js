@@ -39,6 +39,12 @@ function Weather() {
     }
   }, [data, city]);
 
+  useEffect(() => {
+    if (tempCity === "") {
+      setCity(INITIAL_DATA_VALUE);
+    }
+  }, [tempCity]);
+
   return (
     <>
       <div className="temperatureInfo">

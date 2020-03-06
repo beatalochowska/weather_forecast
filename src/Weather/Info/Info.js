@@ -20,10 +20,10 @@ const weatherInfo = (apiData, city) => {
 function Info(props) {
   return props.data === INITIAL_DATA_VALUE ? (
     <div>Loading...</div>
-  ) : props.tempCity === "" ? (
-    <div>Type in city</div>
   ) : (
-    <div>{weatherInfo(props.data, props.city)}</div>
+    <div>
+      <div>{weatherInfo(props.data, props.city)}</div>
+    </div>
   );
 }
 
