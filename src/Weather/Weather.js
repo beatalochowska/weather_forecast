@@ -5,9 +5,9 @@ const INITIAL_DATA_VALUE = null;
 
 const weatherInfo = (apiData, city) => {
   if (city === INITIAL_DATA_VALUE) {
-    return "Wpisz miasto";
+    return "Type in city";
   } else if (apiData.list === undefined) {
-    return "Nie znaleziono takiego miasta";
+    return "Didn't find the city";
   } else {
     const weather = apiData.list[0].weather[0].main;
     const temperature = apiData.list[0].main.temp;
@@ -28,9 +28,14 @@ const getWeatherData = (city, callback) => {
     .catch(err => console.log(err + "this is error"));
 };
 
-const updateData = (setData, setCity, tempCity, INITIAL_DATA_VALUE) => {
-  setData(INITIAL_DATA_VALUE);
+const handleSubmit = (event, setData, setCity, tempCity) => {
+  event.preventDefault();
   setCity(tempCity);
+  setData(INITIAL_DATA_VALUE);
+};
+
+const handleChange = (event, setTempCity) => {
+  setTempCity(event.target.value);
 };
 
 function Weather() {
@@ -54,21 +59,19 @@ function Weather() {
         ) : (
           <h1 className="temperatureInfo_title">Weather in {city}</h1>
         )}
+        <form
+          onSubmit={event => handleSubmit(event, setData, setCity, tempCity)}
+        >
+          <input
+            type="text"
+            onChange={event => handleChange(event, setTempCity)}
+          />
 
-        <input
-          type="text"
-          onChange={event => setTempCity(event.target.value)}
-        ></input>
-        <input
-          type="submit"
-          value="Submit"
-          onClick={() =>
-            updateData(setData, setCity, tempCity, INITIAL_DATA_VALUE)
-          }
-        />
-        {console.log(city)}
+          <button type="submit">submit</button>
+        </form>
+
         {data === INITIAL_DATA_VALUE ? (
-          <div>Brak danych.</div>
+          <div>Loading...</div>
         ) : (
           <div>{weatherInfo(data, city)}</div>
         )}
