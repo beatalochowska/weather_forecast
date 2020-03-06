@@ -12,14 +12,12 @@ function Input(props) {
 
   return (
     <form
-      onSubmit={event =>
-        props.handleSubmit(event, props.setData, props.setCity, tempCity)
-      }
+      onSubmit={event => {
+        event.preventDefault();
+        props.handleSubmit(tempCity);
+      }}
     >
-      <input
-        type="text"
-        onChange={event => props.handleChange(event, setTempCity)}
-      />
+      <input type="text" onChange={event => setTempCity(event.target.value)} />
 
       <button type="submit">submit</button>
     </form>
