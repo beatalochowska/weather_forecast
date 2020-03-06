@@ -7,12 +7,22 @@ const weatherInfo = (apiData, city) => {
   } else if (apiData.list === undefined) {
     return "Didn't find the city";
   } else {
-    const weather = apiData.list[0].weather[0].main;
-    const temperature = apiData.list[0].main.temp;
+    const weatherToday = apiData.list[0].weather[0].main;
+    const weatherTommorow = apiData.list[1].weather[0].main;
+    const temperatureToday = apiData.list[0].main.temp;
+    const temperatureTommorow = apiData.list[1].main.temp;
     return (
-      <div>
-        Temperature: {temperature}&#186;C. Conditions: {weather}
-      </div>
+      <>
+        <div>Today:</div>
+        <div>
+          Temperature: {temperatureToday}&#186;C. Conditions: {weatherToday}
+        </div>
+        <div>Tommorow:</div>
+        <div>
+          Temperature: {temperatureTommorow}&#186;C. Conditions:{" "}
+          {weatherTommorow}
+        </div>
+      </>
     );
   }
 };

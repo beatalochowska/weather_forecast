@@ -14,6 +14,7 @@ const getWeatherData = (city, callback) => {
     .then(res => res.json())
     .then(result => {
       callback(result);
+      console.log(result);
     })
     .catch(err => console.log(err + "this is error"));
 };
