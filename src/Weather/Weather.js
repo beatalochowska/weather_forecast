@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./WeatherStyles.css";
+import Title from "./Title/Title";
+import Input from "./Input/Input";
+import Info from "./Info/Info";
+
 const API_KEY = "9634c5e8feb4b0374fe763d401506e5b";
 const INITIAL_DATA_VALUE = null;
-
-const weatherInfo = (apiData, city) => {
-  if (city === INITIAL_DATA_VALUE) {
-    return "Type in city";
-  } else if (apiData.list === undefined) {
-    return "Didn't find the city";
-  } else {
-    const weather = apiData.list[0].weather[0].main;
-    const temperature = apiData.list[0].main.temp;
-    return `Temperature ${temperature}; Conditions: ${weather}`;
-  }
-};
 
 const getWeatherData = (city, callback) => {
   fetch(
@@ -22,8 +14,6 @@ const getWeatherData = (city, callback) => {
     .then(res => res.json())
     .then(result => {
       callback(result);
-      console.log("Result");
-      console.log(result);
     })
     .catch(err => console.log(err + "this is error"));
 };
@@ -52,29 +42,17 @@ function Weather() {
   return (
     <>
       <div className="temperatureInfo">
-        {city === INITIAL_DATA_VALUE ? (
-          <h1 className="temperatureInfo_title">
-            To check weather type in city
-          </h1>
-        ) : (
-          <h1 className="temperatureInfo_title">Weather in {city}</h1>
-        )}
-        <form
-          onSubmit={event => handleSubmit(event, setData, setCity, tempCity)}
-        >
-          <input
-            type="text"
-            onChange={event => handleChange(event, setTempCity)}
-          />
+        <Title city={city} tempCity={tempCity} />
+        <Input
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          setData={setData}
+          setCity={setCity}
+          tempCity={tempCity}
+          setTempCity={setTempCity}
+        />
 
-          <button type="submit">submit</button>
-        </form>
-
-        {data === INITIAL_DATA_VALUE ? (
-          <div>Loading...</div>
-        ) : (
-          <div>{weatherInfo(data, city)}</div>
-        )}
+        <Info data={data} city={city} tempCity={tempCity} />
       </div>
     </>
   );
