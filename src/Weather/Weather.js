@@ -31,7 +31,6 @@ const handleChange = (event, setTempCity) => {
 function Weather() {
   const [data, setData] = useState(INITIAL_DATA_VALUE);
   const [city, setCity] = useState(INITIAL_DATA_VALUE);
-  const [tempCity, setTempCity] = useState(INITIAL_DATA_VALUE);
 
   useEffect(() => {
     if (data === INITIAL_DATA_VALUE) {
@@ -39,26 +38,18 @@ function Weather() {
     }
   }, [data, city]);
 
-  useEffect(() => {
-    if (tempCity === "") {
-      setCity(INITIAL_DATA_VALUE);
-    }
-  }, [tempCity]);
-
   return (
     <>
       <div className="temperatureInfo">
-        <Title city={city} tempCity={tempCity} />
+        <Title city={city} />
         <Input
           handleSubmit={handleSubmit}
           handleChange={handleChange}
           setData={setData}
           setCity={setCity}
-          tempCity={tempCity}
-          setTempCity={setTempCity}
         />
 
-        <Info data={data} city={city} tempCity={tempCity} />
+        <Info data={data} city={city} />
       </div>
     </>
   );
