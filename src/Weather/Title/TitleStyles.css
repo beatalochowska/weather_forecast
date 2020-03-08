@@ -1,1 +1,4 @@
-/* No CSS *//*# sourceMappingURL=TitleStyles.css.map */
+.cityName {
+  text-transform: capitalize;
+}
+/*# sourceMappingURL=TitleStyles.css.map */

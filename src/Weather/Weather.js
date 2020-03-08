@@ -3,9 +3,7 @@ import "./WeatherStyles.css";
 import Title from "./Title/Title";
 import Input from "./Input/Input";
 import Info from "./Info/Info";
-
-const API_KEY = "9634c5e8feb4b0374fe763d401506e5b";
-export const INITIAL_DATA_VALUE = null;
+import { INITIAL_DATA_VALUE, API_KEY } from "../constants";
 
 const getWeatherData = (city, callback) => {
   fetch(

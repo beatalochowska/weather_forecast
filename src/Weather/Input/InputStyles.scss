@@ -1,0 +1,30 @@
+@mixin button_blue {
+  height: 40px;
+  font-size: 20px;
+  color: black;
+  padding: 0 10px;
+  margin: 20px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.cityForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cityForm_input {
+  @include button_blue;
+  width: 300px;
+}
+.cityForm_submit {
+  @include button_blue;
+  background-color: white;
+  width: 150px;
+}
+
+.cityForm_submit:hover {
+  background-color: rgb(192, 199, 228);
+  transition: ease-in-out 0.3s;
+}

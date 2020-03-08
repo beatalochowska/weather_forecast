@@ -1,5 +1,5 @@
 import React from "react";
-const INITIAL_DATA_VALUE = null;
+import { INITIAL_DATA_VALUE } from "../../constants";
 
 const weatherInfo = (apiData, city) => {
   if (city === INITIAL_DATA_VALUE) {
@@ -16,25 +16,23 @@ const weatherInfo = (apiData, city) => {
 
   return (
     <>
-      <div>Today:</div>
-      <div>
+      <h3>Today:</h3>
+      <p>
         Temperature: {temperatureToday}&#186;C. Conditions: {weatherToday}
-      </div>
-      <div>Tommorow:</div>
-      <div>
+      </p>
+      <h3>Tommorow:</h3>
+      <p>
         Temperature: {temperatureTommorow}&#186;C. Conditions: {weatherTommorow}
-      </div>
+      </p>
     </>
   );
 };
 
 function Info(props) {
   return props.data === INITIAL_DATA_VALUE ? (
-    <div>Loading...</div>
+    <h4>Loading...</h4>
   ) : (
-    <div>
-      <div>{weatherInfo(props.data, props.city)}</div>
-    </div>
+    <div>{weatherInfo(props.data, props.city)}</div>
   );
 }
 

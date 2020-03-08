@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-const INITIAL_DATA_VALUE = null;
+import { INITIAL_DATA_VALUE } from "../../constants";
+import "./InputStyles.css";
 
 function Input(props) {
   const [tempCity, setTempCity] = useState(INITIAL_DATA_VALUE);
@@ -12,14 +13,21 @@ function Input(props) {
 
   return (
     <form
+      className="cityForm"
       onSubmit={event => {
         event.preventDefault();
         props.handleSubmit(tempCity);
       }}
     >
-      <input type="text" onChange={event => setTempCity(event.target.value)} />
+      <input
+        className="cityForm_input"
+        type="text"
+        onChange={event => setTempCity(event.target.value)}
+      />
 
-      <button type="submit">submit</button>
+      <button className="cityForm_submit" type="submit">
+        submit
+      </button>
     </form>
   );
 }
