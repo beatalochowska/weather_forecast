@@ -3,10 +3,10 @@ import { INITIAL_DATA_VALUE } from "../../constants";
 
 const weatherInfo = (apiData, city) => {
   if (city === INITIAL_DATA_VALUE) {
-    return "Type in city";
+    return <h4>Hello! Write your city, please.</h4>;
   }
   if (apiData.list === undefined) {
-    return "Didn't find the city";
+    return <h4>Didn't find the city</h4>;
   }
 
   const weatherToday = apiData.list[0].weather[0].main;
@@ -29,7 +29,9 @@ const weatherInfo = (apiData, city) => {
 };
 
 function Info(props) {
-  return props.data === INITIAL_DATA_VALUE ? (
+  return props.isError ? (
+    <h4>Sorry, connection problems :( </h4>
+  ) : props.data === INITIAL_DATA_VALUE ? (
     <h4>Loading...</h4>
   ) : (
     <div>{weatherInfo(props.data, props.city)}</div>
